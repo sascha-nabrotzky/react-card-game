@@ -1,17 +1,27 @@
 import * as React from "react";
+import PropTypes from 'prop-types';
 
 import "./Card.css";
 import Animal from "./Animal";
 
 export default function Card({ animal, uncovered }) {
+
+    Card.propTypes = {
+        uncovered: PropTypes.bool.isRequired,
+        animal: PropTypes.object.isRequired,
+    };
     
     const front = (
         <div className="card">
-            <div className="card">
             <h1>{animal.name ? animal.name : "Unbekannt"}</h1>
             {animal.image && (
-            <img alt={animal.name} src={`${process.env.PUBLIC_URL}/${animal.image}`} height="200" width="200" />
-              )}
+                <img 
+                    alt={animal.name}
+                    src={`${process.env.PUBLIC_URL}/${animal.image}`} 
+                    height="200" 
+                    width="200"
+                />
+            )}
             <table>
                 <tbody>
                     {Object.keys(Animal.properties).map(property => {
@@ -27,7 +37,6 @@ export default function Card({ animal, uncovered }) {
                 </tbody>
             </table>
         </div>
-        </div>
     );
     const back = <div className="card back" />;
         if (uncovered) {
@@ -35,4 +44,4 @@ export default function Card({ animal, uncovered }) {
         } else {
             return back;
             }
-        }
+        };
